@@ -104,15 +104,15 @@ public class RadarScanActivity extends BaseActivity {
                         scanRelative.setVisibility(View.GONE);
                         scanRocket.setVisibility(View.VISIBLE);
                         //给对方发送文件传输的请求
-//                        String alias = ((RippleView) (view)).getText().toString();
-//                        for (int i = 0; i < neighbors.size(); i++) {
-//                            if (neighbors.get(i).alias.equals(alias)) {
-//                                curNeighbor = neighbors.get(i);
-//                                sendFile(curNeighbor);
-//                                break;
-//                            }
-//                        }
-                        sendStrMsg("send str msg");
+                        String alias = ((RippleView) (view)).getText().toString();
+                        for (int i = 0; i < neighbors.size(); i++) {
+                            if (neighbors.get(i).alias.equals(alias)) {
+                                curNeighbor = neighbors.get(i);
+                                sendFile(curNeighbor);
+                                break;
+                            }
+                        }
+//                        sendStrMsg("send str msg");
                     }
                 });
 
