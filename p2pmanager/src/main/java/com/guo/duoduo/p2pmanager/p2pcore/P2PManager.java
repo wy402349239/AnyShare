@@ -76,13 +76,13 @@ public class P2PManager {
                 P2PConstant.Src.MANAGER, P2PConstant.Recipient.FILE_SEND, paramSendFiles);
     }
 
-    public void sendStrMsg(String msg, SendFile_Callback callback) {
+    public void sendStrMsg(P2PNeighbor dsts, String msg, SendFile_Callback callback) {
         this.sendFile_callback = callback;
         p2PHandler.initSend();
 
-        ParamStrEntity entity = new ParamStrEntity(msg);
+        ParamStrEntity entity = new ParamStrEntity(msg, dsts);
         p2PHandler.send2Handler(P2PConstant.CommandNum.SEND_STR_REQ,
-                P2PConstant.Src.MANAGER, P2PConstant.Recipient.STR_SEND, entity);
+                P2PConstant.Src.MANAGER, P2PConstant.Recipient.FILE_SEND, entity);
     }
 
     public void ackReceive() {

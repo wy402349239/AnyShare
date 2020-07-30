@@ -1,8 +1,6 @@
 package com.guo.duoduo.p2pmanager.p2pcore.send;
 
 
-import java.util.HashMap;
-
 import android.util.Log;
 
 import com.guo.duoduo.p2pmanager.p2pconstant.P2PConstant;
@@ -10,8 +8,10 @@ import com.guo.duoduo.p2pmanager.p2pcore.MelonHandler;
 import com.guo.duoduo.p2pmanager.p2pentity.P2PFileInfo;
 import com.guo.duoduo.p2pmanager.p2pentity.P2PNeighbor;
 import com.guo.duoduo.p2pmanager.p2pentity.param.ParamIPMsg;
-import com.guo.duoduo.p2pmanager.p2pentity.param.ParamSendFiles;
+import com.guo.duoduo.p2pmanager.p2pentity.param.ParamStrEntity;
 import com.guo.duoduo.p2pmanager.p2pentity.param.ParamTCPNotify;
+
+import java.util.HashMap;
 
 /**
  * Created by xxx on 2015/9/20.
@@ -44,11 +44,11 @@ public class SendManager {
                 break;
             }
             case P2PConstant.Src.MANAGER: {
-                if (what == P2PConstant.CommandNum.SEND_FILE_REQ) {
+                if (what == P2PConstant.CommandNum.SEND_STR_REQ) {
                     if (!mSenders.isEmpty())
                         return;
-                    ParamSendFiles param = (ParamSendFiles) obj;
-                    invoke(param.neighbors, param.files);
+                    ParamStrEntity entity = (ParamStrEntity) obj;
+                    invoke(entity.getNeighbor(), entity.getContent());
                 } else if (what == P2PConstant.CommandNum.SEND_ABORT_SELF) {
                     Sender sender = getSender(((P2PNeighbor) obj).ip);
                     sender.dispatchUIMSG(what);
@@ -70,29 +70,21 @@ public class SendManager {
         }
     }
 
-    private void invoke(P2PNeighbor[] neighbors, P2PFileInfo[] files) {
-        StringBuffer stringBuffer = new StringBuffer("");
-        for (P2PFileInfo fileInfo : files) {
-            stringBuffer.append(fileInfo.toString());
+    private void invoke(P2PNeighbor neighbors, String msg) {
+        P2PFileInfo[] files = new P2PFileInfo[0];
+        P2PNeighbor melon = p2PHandler.getNeighborManager().getNeighbors()
+                .get(neighbors.ip);
+        Sender sender = null;
+        if (melon != null) {
+            sender = new Sender(p2PHandler, this, melon, files);
         }
-        String add = stringBuffer.toString();
 
-        for (P2PNeighbor neighbor : neighbors) {
-            P2PNeighbor melon = p2PHandler.getNeighborManager().getNeighbors()
-                    .get(neighbor.ip);
-            Sender sender = null;
-            if (melon != null) {
-                sender = new Sender(p2PHandler, this, melon, files);
-            }
+        mSenders.put(neighbors.ip, sender);
 
-            mSenders.put(neighbor.ip, sender);
-
-            if (melon != null) //通知对方，我要发送文件了
-            {
-                if (p2PHandler != null)
-                    p2PHandler.send2Receiver(melon.inetAddress,
-                            P2PConstant.CommandNum.SEND_FILE_REQ, add);
-            }
+        if (melon != null) {//通知对方，我要发送文件了
+            if (p2PHandler != null)
+                p2PHandler.send2Receiver(melon.inetAddress,
+                        P2PConstant.CommandNum.SEND_STR_REQ, msg);
         }
     }
 

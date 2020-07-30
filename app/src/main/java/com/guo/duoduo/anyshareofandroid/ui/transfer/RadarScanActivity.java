@@ -1,10 +1,6 @@
 package com.guo.duoduo.anyshareofandroid.ui.transfer;
 
 
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,6 +32,10 @@ import com.guo.duoduo.p2pmanager.p2pinterface.Melon_Callback;
 import com.guo.duoduo.p2pmanager.p2pinterface.SendFile_Callback;
 import com.guo.duoduo.randomtextview.RandomTextView;
 import com.guo.duoduo.rippleoutview.RippleView;
+
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RadarScanActivity extends BaseActivity {
     private static final String tag = RadarScanActivity.class.getSimpleName();
@@ -108,19 +108,18 @@ public class RadarScanActivity extends BaseActivity {
                         for (int i = 0; i < neighbors.size(); i++) {
                             if (neighbors.get(i).alias.equals(alias)) {
                                 curNeighbor = neighbors.get(i);
-                                sendFile(curNeighbor);
+//                                sendFile(curNeighbor);
+                                sendStrMsg(curNeighbor, "send str msg");
                                 break;
                             }
                         }
-//                        sendStrMsg("send str msg");
                     }
                 });
-
         initP2P();
     }
 
-    private void sendStrMsg(String msg){
-        p2PManager.sendStrMsg(msg, new SendFile_Callback() {
+    private void sendStrMsg(P2PNeighbor neighbor, String msg) {
+        p2PManager.sendStrMsg(neighbor, msg, new SendFile_Callback() {
             @Override
             public void BeforeSending() {
                 Animation animation = AnimationUtils.loadAnimation(

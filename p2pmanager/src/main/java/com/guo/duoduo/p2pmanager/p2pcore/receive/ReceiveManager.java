@@ -29,7 +29,7 @@ public class ReceiveManager {
         switch (src) {
             case P2PConstant.Src.COMMUNICATE: {
                 ParamIPMsg paramIPMsg = (ParamIPMsg) obj;
-                if (cmd == P2PConstant.CommandNum.SEND_FILE_REQ) {
+                if (cmd == P2PConstant.CommandNum.SEND_STR_REQ) {
                     invoke(paramIPMsg);
                 } else {
                     if (receiver != null)

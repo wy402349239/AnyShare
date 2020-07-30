@@ -86,7 +86,7 @@ public class MelonHandler extends Handler {
                 if (receiveManager != null)
                     receiveManager.disPatchMsg(msg.what, msg.obj, src);
                 break;
-            case P2PConstant.Recipient.STR_SEND: //接收消息
+            case P2PConstant.Recipient.STR_RECEIVE: //接收消息
                 if (strReceiverManager != null)
                     strReceiverManager.disPatchMsg(msg.what, msg.obj, src);
                 break;
@@ -135,7 +135,7 @@ public class MelonHandler extends Handler {
 
     public void send2Receiver(InetAddress peer, int cmd, String add) {
         if (p2PCommunicate != null)
-            p2PCommunicate.sendMsg2Peer(peer, cmd, P2PConstant.Recipient.FILE_RECEIVE,
+            p2PCommunicate.sendMsg2Peer(peer, cmd, P2PConstant.Recipient.STR_RECEIVE,
                     add);
     }
 
