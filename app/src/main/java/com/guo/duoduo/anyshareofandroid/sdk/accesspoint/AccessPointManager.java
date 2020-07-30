@@ -404,7 +404,6 @@ public class AccessPointManager extends WifiManagerWrap {
                             && inetAddress.getHostAddress().startsWith("192.168")) {
                         return inetAddress.getHostAddress();
                     }
-
                 }
             }
         } catch (SocketException ex) {
