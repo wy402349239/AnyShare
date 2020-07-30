@@ -74,8 +74,14 @@ public class MelonHandler extends Handler {
         int dst = msg.arg2;
         switch (dst) {
             case P2PConstant.Recipient.NEIGHBOR: //好友状态上线或者离线
-                if (neighborManager != null)
-                    neighborManager.dispatchMSG((ParamIPMsg) msg.obj);
+                if (msg.obj != null && msg.obj instanceof ParamIPMsg){
+                    if (p2PManager != null){
+                        p2PManager.sendExpose((ParamIPMsg)msg.obj);
+                    }
+                    if (neighborManager != null){
+                        neighborManager.dispatchMSG((ParamIPMsg) msg.obj);
+                    }
+                }
                 break;
             case P2PConstant.Recipient.FILE_SEND: //发送文件
                 if (sendManager != null)

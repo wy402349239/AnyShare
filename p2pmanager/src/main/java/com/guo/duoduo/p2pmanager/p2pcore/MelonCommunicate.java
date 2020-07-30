@@ -81,10 +81,6 @@ public class MelonCommunicate extends Thread {
                     P2PConstant.PORT);
             if (udpSocket != null) {
                 udpSocket.send(sendPacket);
-                Log.d(
-                        tag,
-                        "send upd data = " + sendStr + "; sendto = "
-                                + sendTo.getHostAddress());
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

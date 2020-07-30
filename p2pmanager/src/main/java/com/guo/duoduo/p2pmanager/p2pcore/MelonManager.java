@@ -40,21 +40,16 @@ public class MelonManager {
         Timeout timeout = new Timeout() {
             @Override
             public void onTimeOut() {
-                Log.d(tag, "broadcast 广播 msg");
-
                 sigCommunicate.BroadcastMSG(P2PConstant.CommandNum.ON_LINE,
                         P2PConstant.Recipient.NEIGHBOR);
             }
         };
-        //发送两个广播消息
-        new OSTimer(p2PHandler, timeout, 250).start();
-        new OSTimer(p2PHandler, timeout, 500).start();
+        new OSTimer(p2PHandler, timeout, 200).start();
     }
 
     public void dispatchMSG(ParamIPMsg ipmsg) {
         switch (ipmsg.peerMSG.commandNum) {
             case P2PConstant.CommandNum.ON_LINE: //收到上线广播
-                Log.d(tag, "receive on_line and send on_line_ans message");
                 addNeighbor(ipmsg.peerMSG, ipmsg.peerIAddr);
                 //回复我上线
                 p2PHandler.send2Neighbor(ipmsg.peerIAddr,
@@ -80,8 +75,7 @@ public class MelonManager {
             }
         };
         timeOut.onTimeOut();
-        new OSTimer(p2PHandler, timeOut, 250);
-        new OSTimer(p2PHandler, timeOut, 500);
+        new OSTimer(p2PHandler, timeOut, 200);
     }
 
     public HashMap<String, P2PNeighbor> getNeighbors() {

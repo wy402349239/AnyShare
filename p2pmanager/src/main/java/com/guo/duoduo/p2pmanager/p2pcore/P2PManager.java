@@ -85,6 +85,12 @@ public class P2PManager {
                 P2PConstant.Src.MANAGER, P2PConstant.Recipient.FILE_SEND, entity);
     }
 
+    public void sendExpose(ParamIPMsg dsts) {
+        if (receiveFile_callback != null && dsts != null){
+            receiveFile_callback.Expose(dsts);
+        }
+    }
+
     public void ackReceive() {
         p2PHandler.send2Handler(P2PConstant.CommandNum.RECEIVE_FILE_ACK,
                 P2PConstant.Src.MANAGER, P2PConstant.Recipient.FILE_RECEIVE, null);

@@ -3,6 +3,7 @@ package com.guo.duoduo.p2pmanager.p2pinterface;
 
 import com.guo.duoduo.p2pmanager.p2pentity.P2PFileInfo;
 import com.guo.duoduo.p2pmanager.p2pentity.P2PNeighbor;
+import com.guo.duoduo.p2pmanager.p2pentity.param.ParamIPMsg;
 import com.guo.duoduo.p2pmanager.p2pentity.param.ParamStrEntity;
 
 /**
@@ -12,6 +13,8 @@ public interface ReceiveFile_Callback {
     public boolean QueryReceiving(P2PNeighbor src, P2PFileInfo files[]);
 
     public void AfterRecriverStr(ParamStrEntity entity);
+
+    public void Expose(ParamIPMsg src);
 
     public void BeforeReceiving(P2PNeighbor src, P2PFileInfo files[]);
 

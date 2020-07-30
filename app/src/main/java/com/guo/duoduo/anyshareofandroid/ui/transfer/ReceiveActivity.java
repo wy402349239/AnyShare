@@ -30,6 +30,7 @@ import com.guo.duoduo.p2pmanager.p2pconstant.P2PConstant;
 import com.guo.duoduo.p2pmanager.p2pcore.P2PManager;
 import com.guo.duoduo.p2pmanager.p2pentity.P2PFileInfo;
 import com.guo.duoduo.p2pmanager.p2pentity.P2PNeighbor;
+import com.guo.duoduo.p2pmanager.p2pentity.param.ParamIPMsg;
 import com.guo.duoduo.p2pmanager.p2pentity.param.ParamStrEntity;
 import com.guo.duoduo.p2pmanager.p2pinterface.Melon_Callback;
 import com.guo.duoduo.p2pmanager.p2pinterface.ReceiveFile_Callback;
@@ -183,6 +184,11 @@ public class ReceiveActivity extends BaseActivity
             @Override
             public void BeforeReceiving(P2PNeighbor src, P2PFileInfo[] files) {
 
+            }
+
+            @Override
+            public void Expose(ParamIPMsg src) {
+                Log.e("Tag", src.peerMSG.senderAlias + ":" + src.peerMSG.senderIp + "/" + src.peerPort);
             }
 
             @Override
