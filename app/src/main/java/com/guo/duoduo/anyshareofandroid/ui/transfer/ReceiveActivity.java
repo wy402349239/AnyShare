@@ -210,7 +210,6 @@ public class ReceiveActivity extends BaseActivity
             public void AfterReceiving() {
                 ToastUtils.showTextToast(getApplicationContext(),
                         getString(R.string.file_receive_completed));
-                finish();
             }
 
             @Override
@@ -219,7 +218,6 @@ public class ReceiveActivity extends BaseActivity
                     case P2PConstant.CommandNum.SEND_ABORT_SELF:
                         ToastUtils.showTextToast(getApplicationContext(),
                                 String.format(getString(R.string.send_abort_self), name));
-                        finish();
                         break;
                 }
             }
