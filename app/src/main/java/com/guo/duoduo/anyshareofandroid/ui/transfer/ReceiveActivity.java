@@ -188,7 +188,7 @@ public class ReceiveActivity extends BaseActivity
 
             @Override
             public void Expose(ParamIPMsg src) {
-                Log.e("Tag", src.peerMSG.senderAlias + ":" + src.peerMSG.senderIp + "/" + src.peerPort);
+                Toast.makeText(ReceiveActivity.this, "设备" + src.peerMSG.senderAlias + "(" + src.peerMSG.senderIp + ")上线", Toast.LENGTH_SHORT).show();
             }
 
             @Override
