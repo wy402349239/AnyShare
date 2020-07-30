@@ -74,7 +74,6 @@ public class MelonHandler extends Handler {
         int dst = msg.arg2;
         switch (dst) {
             case P2PConstant.Recipient.NEIGHBOR: //好友状态上线或者离线
-                Log.d(tag, "received neighbor message");
                 if (neighborManager != null)
                     neighborManager.dispatchMSG((ParamIPMsg) msg.obj);
                 break;

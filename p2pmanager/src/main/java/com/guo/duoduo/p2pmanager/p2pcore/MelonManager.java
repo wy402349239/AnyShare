@@ -47,8 +47,7 @@ public class MelonManager {
             }
         };
         //发送两个广播消息
-        new OSTimer(p2PHandler, timeout, 250).start();
-        new OSTimer(p2PHandler, timeout, 500).start();
+        new OSTimer(p2PHandler, timeout, 200).start();
     }
 
     public void dispatchMSG(ParamIPMsg ipmsg) {
@@ -80,8 +79,7 @@ public class MelonManager {
             }
         };
         timeOut.onTimeOut();
-        new OSTimer(p2PHandler, timeOut, 250);
-        new OSTimer(p2PHandler, timeOut, 500);
+        new OSTimer(p2PHandler, timeOut, 200);
     }
 
     public HashMap<String, P2PNeighbor> getNeighbors() {
