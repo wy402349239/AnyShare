@@ -12,14 +12,6 @@
     <application
         android:allowBackup="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".ui.Send2PCActivity"
-            android:label="@string/app_name"></activity>
-
-        <service
-            android:name=".service.WebService"
-            android:enabled="true"
-            android:exported="true"></service>
     </application>
 
 </manifest>

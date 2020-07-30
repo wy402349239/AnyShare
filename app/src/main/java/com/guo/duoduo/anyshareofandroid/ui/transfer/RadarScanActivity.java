@@ -8,8 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,8 +24,6 @@ import com.guo.duoduo.p2pmanager.p2pentity.P2PFileInfo;
 import com.guo.duoduo.p2pmanager.p2pentity.P2PNeighbor;
 import com.guo.duoduo.p2pmanager.p2pinterface.Melon_Callback;
 import com.guo.duoduo.p2pmanager.p2pinterface.SendFile_Callback;
-import com.guo.duoduo.randomtextview.RandomTextView;
-import com.guo.duoduo.rippleoutview.RippleView;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -35,8 +31,6 @@ import java.util.List;
 
 public class RadarScanActivity extends BaseActivity {
     private static final String tag = RadarScanActivity.class.getSimpleName();
-
-    private RandomTextView randomTextView;//设备展示
 
     private P2PManager p2PManager;
     private String alias;//当前设备别名
@@ -71,23 +65,14 @@ public class RadarScanActivity extends BaseActivity {
 
         scanRelative = findViewById(R.id.activity_radar_scan_relative);
 
-        randomTextView = findViewById(R.id.activity_radar_rand_textview);
-        randomTextView.setMode(RippleView.MODE_OUT);
-        randomTextView
-                .setOnRippleViewClickListener(new RandomTextView.OnRippleViewClickListener() {
-                    @Override
-                    public void onRippleViewClicked(View view) {
-                        //给对方发送消息
-                        String alias = ((RippleView) (view)).getText().toString();
-                        for (int i = 0; i < neighbors.size(); i++) {
-                            if (neighbors.get(i).alias.equals(alias)) {
-                                curNeighbor = neighbors.get(i);
-                                sendStrMsg(curNeighbor, "str msg from : " + alias);
-                                break;
-                            }
-                        }
-                    }
-                });
+//        String alias = ((RippleView) (view)).getText().toString();
+//        for (int i = 0; i < neighbors.size(); i++) {
+//            if (neighbors.get(i).alias.equals(alias)) {
+//                curNeighbor = neighbors.get(i);
+//                sendStrMsg(curNeighbor, "str msg from : " + alias);
+//                break;
+//            }
+//        }
         initP2P();
     }
 
@@ -159,8 +144,6 @@ public class RadarScanActivity extends BaseActivity {
                 if (melon != null) {
                     if (!neighbors.contains(melon))
                         neighbors.add(melon);
-                    randomTextView.addKeyWord(melon.alias);
-                    randomTextView.show();
                 }
             }
 
@@ -168,8 +151,6 @@ public class RadarScanActivity extends BaseActivity {
             public void Melon_Removed(P2PNeighbor melon) {
                 if (melon != null) {
                     neighbors.remove(melon);
-                    randomTextView.removeKeyWord(melon.alias);
-                    randomTextView.show();
                 }
             }
         });
