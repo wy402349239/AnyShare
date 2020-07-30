@@ -88,13 +88,7 @@ public class ReceiveActivity extends BaseActivity
                                 }).show();
             }
         });
-        Intent intent = getIntent();
-        if (intent != null) {
-
-            alias = intent.getStringExtra("name");
-        } else
-            alias = Build.DEVICE;
-
+        alias = Build.DEVICE;
         TextView radar_scan_name = (TextView) findViewById(R.id.activity_receive_scan_name);
         radar_scan_name.setText(alias);
 
